@@ -2,22 +2,49 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8" />
-    <title>Meeting Cost Calculator</title>	
+    <title>Meeting Cost Calculator</title>
     <link href="Content/jquery.mobile-1.4.5.min.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.11.1.min.js"></script>
     <script src="Scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="Scripts/amplify.min.js"></script>
     <script src="Scripts/angular.js"></script>
+    <script src="App/main.js"></script>
+    <script src="App/meetingController.js"></script>
+    <script src="App/storageService.js"></script>
+    <script src="App/directives.js"></script>
 </head>
-<body>
+<body ng-app="app">
     <div data-role="page">
         <div data-role="header">
             <h1>Meeting Cost Calculator</h1>
         </div>
-        <div role="main" class="ui-content">
+        <div role="main" class="ui-content" ng-controller="meetingController">
+            <label for="people">People in Meeting : </label>
+            <input type="range" name="people" id="people" min="0" max="100" step="1" ng-model="people" slider-init />
 
+            <label for="avgSalary">Average Salary : </label>
+            <input type="range" name="avgSalary" id="avgSalary" min="0" max="100000" step="1000" ng-model="averageSalary" slider-init />
+            <h1 style="text-align:center">
+                {{cost | currency : '৳ '}}
+            </h1>
+            <div class="ui-grid-b ui-responsive">
+                <div class="ui-block-a">
+                    <button ng-disabled="running" ng-click="start()" class="ui-shadow ui-btn ui-corner-all">Start</button>
+                </div>
+                <div class="ui-block-b">
+                    <button ng-disabled="!running" ng-click="stop()" class="ui-shadow ui-btn ui-corner-all">Stop</button>
+                </div>
+                <div class="ui-block-c">
+                    <button ng-click="reset()" class="ui-shadow ui-btn ui-corner-all">Reset</button>
+                </div>
+            </div>
         </div>
         <div data-role="footer">
-            <p>&copy;Md. Abdul Alim, December 2016</p>
+            <p>&copy;Md. Abdul Alim &nbsp; &ndash; &nbsp;<span id="todays_date" style="font-style: italic"></span></p>
+            <script type="text/javascript">
+                var today = new Date();
+                document.getElementById("todays_date").appendChild(document.createTextNode(today.toString("MMMM d, yyyy")));
+            </script>
         </div>
     </div>
 </body>
