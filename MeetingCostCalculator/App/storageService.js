@@ -1,5 +1,6 @@
 ﻿/// <reference path="E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculator\Scripts/angular.min.js" />
 /// <reference path="E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculator\Scripts/amplify.min.js" />
+
 (function (app) {
     var storageService = function () {
         var storage = {}; 
