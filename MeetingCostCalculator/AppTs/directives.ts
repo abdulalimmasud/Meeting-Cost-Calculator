@@ -3,5 +3,17 @@
 module meetingCostCalculator {
     'use strict';
 
-    angular.module("app", []);
+    export function sliderInitDerective() {
+        return {
+            link: function link(scope, element, attrs) {
+                var model = scope.$eval(attrs.ngModel);
+                var unwatch = scope.$watch(model, (newValue) => {
+                    if (newValue) {
+                        element.slider('refresh');
+                        unwatch();
+                    }
+                });
+            }
+        }
+    }
 }

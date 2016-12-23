@@ -3,5 +3,8 @@
 module meetingCostCalculator {
     'use strict';
 
-    angular.module("app", []);
+    angular.module("app", [])
+        .directive("sliderInit", sliderInitDerective)
+        .service("storageService", storageService)
+        .controller("meetingController", meetingController);
 }

@@ -2,6 +2,18 @@
 var meetingCostCalculator;
 (function (meetingCostCalculator) {
     'use strict';
-    angular.module("app", []);
+    function sliderInitDerective() {
+        return {
+            link: function link(scope, element, attrs) {
+                var model = scope.$eval(attrs.ngModel);
+                var unwatch = scope.$watch(model, function (newValue) {
+                    if (newValue) {
+                        element.slider('refresh');
+                        unwatch();
+                    }
+                });
+            }
+        };
+    }
+    meetingCostCalculator.sliderInitDerective = sliderInitDerective;
 })(meetingCostCalculator || (meetingCostCalculator = {}));
-//# sourceMappingURL=directives.js.map

@@ -17,3 +17,4 @@ E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculat
 E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculator\obj\Debug\MeetingCostCalculator.dll
 E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculator\obj\Debug\MeetingCostCalculator.pdb
+E:\Study\Project\MeetingCostCalculator\MeetingCostCalculator\MeetingCostCalculator\obj\Debug\MeetingCostCalculator.csprojResolveAssemblyReference.cache
