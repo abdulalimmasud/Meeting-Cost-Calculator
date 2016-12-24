@@ -8,7 +8,7 @@ module meetingCostCalculator {
         constructor(
             private $scope: any,
             $timeout: ng.ITimeoutService,
-            storageService: any) {
+            storageService: IStorageService) {
             var settings = storageService.getSettings();
 
             $scope.people = settings.people;
