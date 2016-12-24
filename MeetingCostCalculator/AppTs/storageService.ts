@@ -3,17 +3,17 @@
 module meetingCostCalculator {
     'use strict';
 
-    export class storageService {
+    export class storageService implements IStorageService {
         meetingCostCalculatorSettingsKey: string = "meetingCostCalculatorSettingsKey";
 
-        getSettings() {
+        getSettings(): settingsModel {
             var settings = amplify.store(this.meetingCostCalculatorSettingsKey);
             if (!settings) {
                 settings = { people: 5, averageSalary: 40000 };
             }
             return settings;
         }
-        saveSettings(settings) {
+        saveSettings(settings: settingsModel) {
             amplify.store(this.meetingCostCalculatorSettingsKey, settings);
         }
     };

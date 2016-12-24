@@ -37,6 +37,7 @@ var meetingCostCalculator;
                 $scope.cost = 0;
             };
         }
+        meetingController.$inject = ["$scope", "$timeout", "storageService"];
         return meetingController;
     })();
     meetingCostCalculator.meetingController = meetingController;

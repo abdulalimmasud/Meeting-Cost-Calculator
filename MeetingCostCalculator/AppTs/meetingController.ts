@@ -4,6 +4,7 @@ module meetingCostCalculator {
     'use strict';
 
     export class meetingController {
+        public static $inject = ["$scope", "$timeout", "storageService"];
         constructor(
             private $scope: any,
             $timeout: ng.ITimeoutService,

@@ -310,8 +310,10 @@
   <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="AppTs\directives.ts" />
+    <TypeScriptCompile Include="AppTs\interfaces\IStorageInterface.ts" />
     <TypeScriptCompile Include="AppTs\main.ts" />
     <TypeScriptCompile Include="AppTs\meetingController.ts" />
+    <TypeScriptCompile Include="AppTs\models.ts" />
     <TypeScriptCompile Include="AppTs\storageService.ts" />
     <TypeScriptCompile Include="AppTs\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\amplifyjs\amplifyjs.d.ts" />
