@@ -3,6 +3,8 @@
 /// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../scripts/typings/jquerymobile/jquerymobile.d.ts" />
 
+/// <reference path="interfaces/istorageinterface.ts" />
+/// <reference path="interfaces/imeetingscope.ts" />
 
 /// <reference path="storageservice.ts" />
 /// <reference path="meetingcontroller.ts" />

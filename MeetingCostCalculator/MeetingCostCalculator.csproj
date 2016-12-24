@@ -310,6 +310,7 @@
   <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="AppTs\directives.ts" />
+    <TypeScriptCompile Include="AppTs\interfaces\IMeetingScope.ts" />
     <TypeScriptCompile Include="AppTs\interfaces\IStorageInterface.ts" />
     <TypeScriptCompile Include="AppTs\main.ts" />
     <TypeScriptCompile Include="AppTs\meetingController.ts" />

@@ -4,39 +4,43 @@ var meetingCostCalculator;
     'use strict';
     var meetingController = (function () {
         function meetingController($scope, $timeout, storageService) {
+            var _this = this;
             this.$scope = $scope;
+            this.$timeout = $timeout;
+            this.storageService = storageService;
             var settings = storageService.getSettings();
             $scope.people = settings.people;
             $scope.averageSalary = settings.averageSalary;
-            var saveSettings = function () {
-                storageService.saveSettings({ people: $scope.people, averageSalary: $scope.averageSalary });
-            };
-            $scope.$watch("people", saveSettings);
-            $scope.$watch("averageSalary", saveSettings);
+            $scope.$watch("people", function () { return _this.saveSettings; });
+            $scope.$watch("averageSalary", function () { return _this.saveSettings; });
             $scope.running = false;
             $scope.cost = 0;
-            $scope.calculateCost = function () {
-                return ($scope.people * $scope.averageSalary) / (26 * 8 * 60 * 60);
-            };
-            var cancelPromise;
-            var tick = function () {
-                cancelPromise = $timeout(function work() {
-                    $scope.cost += $scope.calculateCost();
-                    cancelPromise = $timeout(work, 1000);
-                }, 1000);
-            };
-            $scope.start = function () {
-                $scope.running = true;
-                tick();
-            };
-            $scope.stop = function () {
-                $scope.running = false;
-                $timeout.cancel(cancelPromise);
-            };
-            $scope.reset = function () {
-                $scope.cost = 0;
-            };
+            $scope.vm = this;
         }
+        meetingController.prototype.saveSettings = function () {
+            this.storageService.saveSettings(new meetingCostCalculator.settingsModel(this.$scope.people, this.$scope.averageSalary));
+        };
+        meetingController.prototype.calculateCost = function () {
+            return (this.$scope.people * this.$scope.averageSalary) / (26 * 8 * 60 * 60);
+        };
+        meetingController.prototype.tick = function () {
+            var self = this;
+            self.cancelPromise = self.$timeout(function work() {
+                self.$scope.cost += self.calculateCost();
+                self.cancelPromise = self.$timeout(work, 1000);
+            }, 1000);
+        };
+        meetingController.prototype.start = function () {
+            this.$scope.running = true;
+            this.tick();
+        };
+        meetingController.prototype.stop = function () {
+            this.$scope.running = false;
+            this.$timeout.cancel(this.cancelPromise);
+        };
+        meetingController.prototype.reset = function () {
+            this.$scope.cost = 0;
+        };
         meetingController.$inject = ["$scope", "$timeout", "storageService"];
         return meetingController;
     })();

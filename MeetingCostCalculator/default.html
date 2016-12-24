@@ -12,6 +12,7 @@
     <script src="App/meetingController.js"></script>
     <script src="App/storageService.js"></script>
     <script src="App/directives.js"></script>-->
+    <script src="AppTs/models.js"></script>
     <script src="AppTs/directives.js"></script>
     <script src="AppTs/meetingController.js"></script>
     <script src="AppTs/storageService.js"></script>
@@ -26,20 +27,20 @@
             <label for="people">People in Meeting : </label>
             <input type="range" name="people" id="people" min="0" max="100" step="1" ng-model="people" slider-init />
 
-            <label for="avgSalary">Average Salary : </label>
-            <input type="range" name="avgSalary" id="avgSalary" min="0" max="100000" step="1000" ng-model="averageSalary" slider-init />
+            <label for="averageSalary">Average Salary : </label>
+            <input type="range" name="averageSalary" id="averageSalary" min="0" max="100000" step="1000" ng-model="averageSalary" slider-init />
             <h1 style="text-align:center">
                 {{cost | currency : '৳ '}}
             </h1>
             <div class="ui-grid-b ui-responsive">
                 <div class="ui-block-a">
-                    <button ng-disabled="running" ng-click="start()" class="ui-shadow ui-btn ui-corner-all">Start</button>
+                    <button ng-disabled="running" ng-click="vm.start()" class="ui-shadow ui-btn ui-corner-all">Start</button>
                 </div>
                 <div class="ui-block-b">
-                    <button ng-disabled="!running" ng-click="stop()" class="ui-shadow ui-btn ui-corner-all">Stop</button>
+                    <button ng-disabled="!running" ng-click="vm.stop()" class="ui-shadow ui-btn ui-corner-all">Stop</button>
                 </div>
                 <div class="ui-block-c">
-                    <button ng-click="reset()" class="ui-shadow ui-btn ui-corner-all">Reset</button>
+                    <button ng-click="vm.reset()" class="ui-shadow ui-btn ui-corner-all">Reset</button>
                 </div>
             </div>
         </div>

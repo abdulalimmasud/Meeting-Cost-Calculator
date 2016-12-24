@@ -3,48 +3,54 @@
 module meetingCostCalculator {
     'use strict';
 
+    
+
     export class meetingController {
+        private cancelPromise: any;
+
         public static $inject = ["$scope", "$timeout", "storageService"];
+
         constructor(
-            private $scope: any,
-            $timeout: ng.ITimeoutService,
-            storageService: IStorageService) {
+            private $scope: IMeetingScope,
+            private $timeout: ng.ITimeoutService,
+            private storageService: IStorageService) {
             var settings = storageService.getSettings();
 
             $scope.people = settings.people;
             $scope.averageSalary = settings.averageSalary;
 
-            var saveSettings = function () {
-                storageService.saveSettings({ people: $scope.people, averageSalary: $scope.averageSalary });
-            }
-            $scope.$watch("people", saveSettings);
-            $scope.$watch("averageSalary", saveSettings);
+            $scope.$watch("people", () => this.saveSettings);
+            $scope.$watch("averageSalary", () => this.saveSettings);
 
             $scope.running = false;
             $scope.cost = 0;
+            $scope.vm = this;
+        }
+        saveSettings() {
+            this.storageService.saveSettings(
+                new settingsModel(this.$scope.people, this.$scope.averageSalary));
+        }
+        calculateCost() {
+            return (this.$scope.people * this.$scope.averageSalary) / (26 * 8 * 60 * 60);
+        }
 
-            $scope.calculateCost = function () {
-                return ($scope.people * $scope.averageSalary) / (26 * 8 * 60 * 60);
-            }
-
-            var cancelPromise;
-            var tick = function () {
-                cancelPromise = $timeout(function work() {
-                    $scope.cost += $scope.calculateCost();
-                    cancelPromise = $timeout(work, 1000);
-                },1000)
-            }
-            $scope.start = function () {
-                $scope.running = true;
-                tick();
-            }
-            $scope.stop = function () {
-                $scope.running = false;
-                $timeout.cancel(cancelPromise);
-            }
-            $scope.reset = function () {
-                $scope.cost = 0;
-            }
+        tick() {
+            var self = this;
+            self.cancelPromise = self.$timeout(function work() {
+                self.$scope.cost += self.calculateCost();
+                self.cancelPromise = self.$timeout(work, 1000);
+            }, 1000)
+        }
+        start() {
+            this.$scope.running = true;
+            this.tick();
+        }
+        stop() {
+            this.$scope.running = false;
+            this.$timeout.cancel(this.cancelPromise);
+        }
+        reset() {
+            this.$scope.cost = 0;
         }
     }
 }
